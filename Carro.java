@@ -1,6 +1,7 @@
 package objetos;
 
 public class Carro {
+	private Integer id;
 	private String marca;
 	private String modelo;
 	private int anoFabricacao;
@@ -9,6 +10,12 @@ public class Carro {
 	private double preco;
 	
 	// GETTERS E SETTERS
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getMarca() {
 		return marca;
 	}
@@ -47,8 +54,10 @@ public class Carro {
 	}
 	
 	// CONSTRUTORES
-	public Carro(String marca, String modelo, int anoFabricacao, String cor, double quilometragem, double preco) {
+	public Carro(Integer id, String marca, String modelo, int anoFabricacao, String cor, double quilometragem,
+			double preco) {
 		super();
+		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.anoFabricacao = anoFabricacao;
@@ -61,10 +70,14 @@ public class Carro {
 	}
 	
 	// TO STRING
+	@Override
 	public String toString() {
-		return "Carro [marca=" + marca + ", modelo=" + modelo + ", anoFabricacao=" + anoFabricacao + ", cor=" + cor
-				+ ", quilometragem=" + quilometragem + ", preco=" + preco + "]";
+		return "Carro [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", anoFabricacao=" + anoFabricacao
+				+ ", cor=" + cor + ", quilometragem=" + quilometragem + ", preco=" + preco + "]";
 	}
+	
+	
+	
 	
 	
 	
