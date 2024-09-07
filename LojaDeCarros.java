@@ -46,9 +46,16 @@ public class LojaDeCarros {
 	
 	public void exibirListaDeCarros() {
 		
-		for (Carro carro : ListaDeCarros) 
+		if(ListaDeCarros.size() > 0)
 		{
-			System.out.println(carro);
+			for (Carro carro : ListaDeCarros) 
+			{
+				System.out.println(carro);
+			}
+		}
+		else
+		{
+			System.out.println("Nenhum carro registrado nessa loja");
 		}
 		
 		System.out.println("");
@@ -57,80 +64,106 @@ public class LojaDeCarros {
 	
 	public void excluirCarro() {
 		
-		System.out.println("Insira o modelo do carro que deseja excluir: ");
-		String modeloCarroExcluido = scan.nextLine();
-		
-		System.out.println("Insira ID do carro que deseja excluir: ");
-		Integer idCarroExcluido = scan.nextInt();
-		scan.nextLine(); // para limpar o teclado
-		
-		boolean carroEncontrado=false;
-		
-		for (Carro carro : ListaDeCarros) 
+		if(ListaDeCarros.size() > 0)
 		{
-			if(carro.getModelo().equalsIgnoreCase(modeloCarroExcluido))
+			System.out.println("Insira o modelo do carro que deseja excluir: ");
+			String modeloCarroExcluido = scan.nextLine();
+			
+			System.out.println("Insira ID do carro que deseja excluir: ");
+			Integer idCarroExcluido = scan.nextInt();
+			scan.nextLine(); // para limpar o teclado
+			
+			boolean carroEncontrado=false;
+			Carro carroExcluido=null;
+			
+			for (Carro carro : ListaDeCarros) 
 			{
-				if(carro.getId().equals(idCarroExcluido))
+				if(carro.getModelo().equalsIgnoreCase(modeloCarroExcluido))
 				{
-					System.out.println("O " + modeloCarroExcluido + " com ID " + idCarroExcluido + " foi excluido \n");
-					ListaDeCarros.remove(carro);
-					carroEncontrado=true;
-					break;
+					if(carro.getId().equals(idCarroExcluido))
+					{
+						System.out.println("O " + modeloCarroExcluido + " com ID " + idCarroExcluido + " foi excluido \n");
+						carroExcluido=carro;
+						carroEncontrado=true;
+						break;
+					}
 				}
 			}
+			
+			if(carroEncontrado)
+			{
+				ListaDeCarros.remove(carroExcluido);
+			}
+			else
+			{
+				System.out.println("O " + modeloCarroExcluido + " com ID " + idCarroExcluido + " não foi encontrado \n");
+			}
 		}
-		
-		if(!carroEncontrado)
+		else
 		{
-			System.out.println("O " + modeloCarroExcluido + " com ID " + idCarroExcluido + " não foi encontrado \n");
+			System.out.println("Nenhum carro registrado nessa loja \n");
 		}
 		
 	}
 	
 	public void pesquisarMarca() {
 		
-		System.out.println("Insira a marca que deseja pesquisar: ");
-		String marcaCarroPesquisado = scan.nextLine();
-		
-		boolean carroEncontrado=false;
-		
-		for (Carro carro : ListaDeCarros) 
+		if(ListaDeCarros.size() > 0)
 		{
-			if(carro.getMarca().equalsIgnoreCase(marcaCarroPesquisado))
+			System.out.println("Insira a marca que deseja pesquisar: ");
+			String marcaCarroPesquisado = scan.nextLine();
+			
+			boolean carroEncontrado=false;
+			
+			for (Carro carro : ListaDeCarros) 
 			{
-				System.out.println(carro);
-				carroEncontrado=true;
+				if(carro.getMarca().equalsIgnoreCase(marcaCarroPesquisado))
+				{
+					System.out.println(carro);
+					carroEncontrado=true;
+				}
+			}
+			System.out.println("");
+			
+			if(!carroEncontrado)
+			{
+				System.out.println("nenhum carro " + marcaCarroPesquisado + " foi encontrado \n");
 			}
 		}
-		System.out.println("");
-		
-		if(!carroEncontrado)
+		else
 		{
-			System.out.println("nenhum carro " + marcaCarroPesquisado + " foi encontrado \n");
+			System.out.println("Nenhum carro registrado nessa loja \n");
 		}
 		
 	}
 	
 	public void pesquisarModelo() {
 		
-		System.out.println("Insira a modelo que deseja pesquisar: ");
-		String modeloCarroPesquisado = scan.nextLine();
-		
-		boolean carroEncontrado=false;
-		
-		for (Carro carro : ListaDeCarros) 
+		if(ListaDeCarros.size() > 0)
 		{
-			if(carro.getModelo().equalsIgnoreCase(modeloCarroPesquisado))
+			System.out.println("Insira a modelo que deseja pesquisar: ");
+			String modeloCarroPesquisado = scan.nextLine();
+			
+			boolean carroEncontrado=false;
+			
+			for (Carro carro : ListaDeCarros) 
 			{
-				System.out.println(carro);
-				carroEncontrado=true;
+				if(carro.getModelo().equalsIgnoreCase(modeloCarroPesquisado))
+				{
+					System.out.println(carro);
+					carroEncontrado=true;
+				}
+			}
+			System.out.println("");
+			
+			if(!carroEncontrado)
+			{
+				System.out.println("nenhum carro " + modeloCarroPesquisado + " foi encontrado \n");
 			}
 		}
-		System.out.println("");
-		
-		if(!carroEncontrado)
+		else
 		{
-			System.out.println("nenhum carro " + modeloCarroPesquisado + " foi encontrado \n");
+			System.out.println("Nenhum carro registrado nessa loja \n");
 		}
 		
 	}
@@ -153,61 +186,75 @@ public class LojaDeCarros {
 	
 	public void venderCarro() {
 		
-		System.out.println("Insira o modelo do carro que deseja vender: ");
-		String modeloCarroVendido = scan.nextLine();
-		
-		System.out.println("Insira ID do carro que deseja vender: ");
-		Integer idCarroVendido = scan.nextInt();
-		scan.nextLine(); // para limpar o teclado
-		
-		boolean carroEncontrado=false;
-		boolean menu=true;
-		
-		for (Carro carro : ListaDeCarros) 
+		if(ListaDeCarros.size() > 0)
 		{
-			if(carro.getModelo().equalsIgnoreCase(modeloCarroVendido))
+			System.out.println("Insira o modelo do carro que deseja vender: ");
+			String modeloCarroVendido = scan.nextLine();
+			
+			System.out.println("Insira ID do carro que deseja vender: ");
+			Integer idCarroVendido = scan.nextInt();
+			scan.nextLine(); // para limpar o teclado
+			
+			boolean carroEncontrado=false;
+			boolean menu=true;
+			Carro carroVendido=null;
+			
+			for (Carro carro : ListaDeCarros) 
 			{
-				if(carro.getId().equals(idCarroVendido))
+				if(carro.getModelo().equalsIgnoreCase(modeloCarroVendido))
 				{
-					int escVenda=0;
-					while(menu)
+					if(carro.getId().equals(idCarroVendido))
 					{
-						System.out.println("O carro foi vendido pelo preço cadastrado? \n[1] Sim \n[2] Não \nSua escolha: ");
-						carroEncontrado=true;
-						escVenda = scan.nextInt();
-						scan.nextLine(); // para limpar o teclado
-						
-						if(escVenda==1)
+						int escVenda=0;
+						while(menu)
 						{
-							saldoLoja+=carro.getPreco();
-							System.out.println("Novo Saldo: R$" + saldoLoja + "\n");
-							menu=false;
-							ListaDeCarros.remove(carro);
-						}
-						else if(escVenda==2)
-						{
-							System.out.print("Por quanto o " + modeloCarroVendido + " com ID " + idCarroVendido + " foi vendido? \nR$");
-							saldoLoja+=scan.nextDouble();
+							
+							System.out.println("O carro foi vendido pelo preço cadastrado? \n[1] Sim \n[2] Não \nSua escolha: ");
+							carroEncontrado=true;
+							carroVendido=carro;
+							escVenda = scan.nextInt();
 							scan.nextLine(); // para limpar o teclado
-							System.out.println("Novo Saldo: R$" + saldoLoja + "\n");
-							menu=false;
-							ListaDeCarros.remove(carro);
-						}
-						else
-						{
-							System.out.println("Escolha Invalida! \n");
+							
+							if(escVenda==1)
+							{
+								saldoLoja+=carro.getPreco();
+								System.out.println("Vendido \n");
+								menu=false;
+								break;
+							}
+							else if(escVenda==2)
+							{
+								System.out.print("Por quanto o " + modeloCarroVendido + " com ID " + idCarroVendido + " foi vendido? \nR$");
+								saldoLoja+=scan.nextDouble();
+								scan.nextLine(); // para limpar o teclado
+								System.out.println("Vendido\n");
+								menu=false;
+								break;
+							}
+							else
+							{
+								System.out.println("Escolha Invalida! \n");
+							}
 						}
 					}
 				}
 			}
+			
+			if(carroEncontrado)
+			{
+				ListaDeCarros.remove(carroVendido);
+			}
+			else
+			{
+				System.out.println("O " + modeloCarroVendido + " com ID " + idCarroVendido + " não foi encontrado \n");
+			}
 		}
-		
-		if(!carroEncontrado)
+		else
 		{
-			System.out.println("O " + modeloCarroVendido + " com ID " + idCarroVendido + " não foi encontrado \n");
+			System.out.println("Nenhum carro registrado nessa loja \n");
 		}
 		
 	}
 	
-	
+
 }
